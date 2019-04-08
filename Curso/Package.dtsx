@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="4/8/2019 3:34:53 PM"
@@ -11,9 +11,2015 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionGUID="{D2DEF3BA-9749-45E8-B050-1F6C02F74DC4}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{DAC80A3E-1056-4D44-AE16-3BC4B563B625}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Alquileres.xlsx]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{6C3F77B6-AE9F-4DE4-AF5E-AFC547F24B8C}"
+      DTS:ObjectName="Alquileres.xlsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Trabajo\Cursos\SSIS\SSIS20190408\Alquileres.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D63AA7DD-26DE-445A-B2A3-10A78A73651E}"
+      DTS:ObjectName="LocalHost.CursoSSIS1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=CursoSSIS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Importar Clientes"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:Disabled="True"
+      DTS:DTSID="{df813ed7-3cfb-46d2-baee-9f9f9c6bcfa4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Importar Clientes"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Importar Clientes\Agregado"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Agregado;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;3"
+              description="Agrega datos mediante funciones como Average, Sum, Count, Max y Min. Por ejemplo, se agrupan datos para calcular la suma de las ventas por producto o el promedio de visitas por día."
+              name="Agregado"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de valores distintos de una columna que cuenta la agregación de forma distintiva. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 valores de clave. No especificado indica que no se usa ningún valor de CountDistinctScale."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de valores distintos de una columna que cuenta la agregación de forma distintiva. Si se especifica un valor de CountDistinctScale, el valor de CountDistinctKeys tiene prioridad."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje en el que puede ampliarse la memoria durante la agregación. Los valores válidos están comprendidos entre 1 y 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Importar Clientes\Agregado.Inputs[Entrada de agregado 1]"
+                  name="Entrada de agregado 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Clientes\Agregado.Inputs[Entrada de agregado 1].Columns[Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cliente"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Clientes\Agregado.Outputs[Salida de agregado 1]"
+                  name="Salida de agregado 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Clientes\Agregado.Outputs[Salida de agregado 1].Columns[Cliente]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Agregado.Outputs[Salida de agregado 1].Columns[Cliente]"
+                      name="Cliente">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el id. de la columna de entrada usada en la agregación."
+                          name="AggregationColumnId">#{Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el tipo de agregación."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica si la columna requiere tratamiento especial porque puede contener datos de tamaño excesivo o porque requiere mayor precisión que el tipo de datos float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación de cadenas."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Clientes\Alquileres"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Alquileres"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">Hoja2$Área_de_impresió</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Importar Clientes\Alquileres.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Alquileres.xlsx]"
+                  connectionManagerRefId="Package.ConnectionManagers[Alquileres.xlsx]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Pelicula]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Pelicula]"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Pelicula]"
+                      name="Pelicula"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Alquiler]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Alquiler]"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Alquiler]"
+                      name="F.Alquiler"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Devolucion]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Devolucion]"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Devolucion]"
+                      name="F.Devolucion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Cliente]"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]"
+                      name="Cliente"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Empleado]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Empleado]"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].Columns[Empleado]"
+                      name="Empleado"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Pelicula]"
+                      dataType="wstr"
+                      length="255"
+                      name="Pelicula" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Alquiler]"
+                      dataType="date"
+                      name="F#Alquiler" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Devolucion]"
+                      dataType="date"
+                      name="F#Devolucion" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Cliente]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cliente" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Empleado]"
+                      dataType="wstr"
+                      length="255"
+                      name="Empleado" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Pelicula]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Pelicula]"
+                      name="Pelicula" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Alquiler]"
+                      dataType="date"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Alquiler]"
+                      name="F#Alquiler" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Devolucion]"
+                      dataType="date"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Devolucion]"
+                      name="F#Devolucion" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Cliente]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Cliente]"
+                      name="Cliente" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Empleado]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Empleado]"
+                      name="Empleado" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Clientes\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Clientes\Conversión de datos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Importar Clientes\Conversión de datos.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Clientes\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cliente"
+                      lineageId="Package\Importar Clientes\Agregado.Outputs[Salida de agregado 1].Columns[Cliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\Importar Clientes\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]"
+                      name="Copia de Cliente"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Importar Clientes\Agregado.Outputs[Salida de agregado 1].Columns[Cliente]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\Importar Clientes\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Clientes\Destino de SQL Server"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5"
+              description="Destino de SQL Server"
+              name="Destino de SQL Server"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="El nombre del objeto de base de datos en el que copiar datos."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[Pelis].[Clientes]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Importar Clientes\Destino de SQL Server.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Importar Clientes\Destino de SQL Server.Inputs[Entrada de destino de SQL Server]"
+                  hasSideEffects="true"
+                  name="Entrada de destino de SQL Server">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Clientes\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].Columns[Copia de Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copia de Cliente"
+                      externalMetadataColumnId="Package\Importar Clientes\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
+                      lineageId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Importar Clientes\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[idCliente]"
+                      dataType="i4"
+                      name="idCliente" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Clientes\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Importar Clientes\Mapa de caracteres"
+              componentClassID="Microsoft.CharacterMap"
+              contactInfo="Mapa de caracteres;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Especifica las operaciones de cadena para aplicar."
+              name="Mapa de caracteres"
+              usesDispositions="true"
+              version="2">
+              <inputs>
+                <input
+                  refId="Package\Importar Clientes\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]"
+                  name="Entrada de mapa de caracteres">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Clientes\Mapa de caracteres.Inputs[Entrada de mapa de caracteres].Columns[Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cliente"
+                      errorOrTruncationOperation="Asignar columna"
+                      lineageId="Package\Importar Clientes\Agregado.Outputs[Salida de agregado 1].Columns[Cliente]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          dataType="System.UInt32"
+                          name="MapFlags"
+                          typeConverter="LCMappingType">16777728</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Clientes\Mapa de caracteres.Outputs[Salida de mapa de caracteres]"
+                  exclusionGroup="1"
+                  name="Salida de mapa de caracteres"
+                  synchronousInputId="Package\Importar Clientes\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Clientes\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de mapa de caracteres"
+                  synchronousInputId="Package\Importar Clientes\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Clientes\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Clientes\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Clientes\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Clientes\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Importar Clientes.Paths[Salida de agregado 1]"
+              endId="Package\Importar Clientes\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]"
+              name="Salida de agregado 1"
+              startId="Package\Importar Clientes\Agregado.Outputs[Salida de agregado 1]" />
+            <path
+              refId="Package\Importar Clientes.Paths[Salida de conversión de datos]"
+              endId="Package\Importar Clientes\Destino de SQL Server.Inputs[Entrada de destino de SQL Server]"
+              name="Salida de conversión de datos"
+              startId="Package\Importar Clientes\Conversión de datos.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\Importar Clientes.Paths[Salida de mapa de caracteres]"
+              endId="Package\Importar Clientes\Conversión de datos.Inputs[Entrada de conversión de datos]"
+              name="Salida de mapa de caracteres"
+              startId="Package\Importar Clientes\Mapa de caracteres.Outputs[Salida de mapa de caracteres]" />
+            <path
+              refId="Package\Importar Clientes.Paths[Salida de origen de Excel]"
+              endId="Package\Importar Clientes\Agregado.Inputs[Entrada de agregado 1]"
+              name="Salida de origen de Excel"
+              startId="Package\Importar Clientes\Alquileres.Outputs[Salida de origen de Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Importar Peliculas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{12A393D3-BBE9-4228-96DF-47FEDFAE5816}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Importar Peliculas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Importar Peliculas\Agregado"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Agregado;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;3"
+              description="Agrega datos mediante funciones como Average, Sum, Count, Max y Min. Por ejemplo, se agrupan datos para calcular la suma de las ventas por producto o el promedio de visitas por día."
+              name="Agregado"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de valores distintos de una columna que cuenta la agregación de forma distintiva. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 valores de clave. No especificado indica que no se usa ningún valor de CountDistinctScale."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de valores distintos de una columna que cuenta la agregación de forma distintiva. Si se especifica un valor de CountDistinctScale, el valor de CountDistinctKeys tiene prioridad."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje en el que puede ampliarse la memoria durante la agregación. Los valores válidos están comprendidos entre 1 y 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Agregado.Inputs[Entrada de agregado 1]"
+                  name="Entrada de agregado 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Agregado.Inputs[Entrada de agregado 1].Columns[Pelicula]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Pelicula"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Pelicula]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Agregado.Outputs[Salida de agregado 1]"
+                  name="Salida de agregado 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Agregado.Outputs[Salida de agregado 1].Columns[Pelicula]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Agregado.Outputs[Salida de agregado 1].Columns[Pelicula]"
+                      name="Pelicula">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el id. de la columna de entrada usada en la agregación."
+                          name="AggregationColumnId">#{Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Pelicula]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el tipo de agregación."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica si la columna requiere tratamiento especial porque puede contener datos de tamaño excesivo o porque requiere mayor precisión que el tipo de datos float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación de cadenas."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Agregado 1"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Agregado;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;3"
+              description="Agrega datos mediante funciones como Average, Sum, Count, Max y Min. Por ejemplo, se agrupan datos para calcular la suma de las ventas por producto o el promedio de visitas por día."
+              name="Agregado 1"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de valores distintos de una columna que cuenta la agregación de forma distintiva. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 valores de clave. No especificado indica que no se usa ningún valor de CountDistinctScale."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de valores distintos de una columna que cuenta la agregación de forma distintiva. Si se especifica un valor de CountDistinctScale, el valor de CountDistinctKeys tiene prioridad."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje en el que puede ampliarse la memoria durante la agregación. Los valores válidos están comprendidos entre 1 y 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Agregado 1.Inputs[Entrada de agregado 1]"
+                  name="Entrada de agregado 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Agregado 1.Inputs[Entrada de agregado 1].Columns[Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cliente"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1]"
+                  name="Salida de agregado 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1].Columns[Cliente]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1].Columns[Cliente]"
+                      name="Cliente">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el id. de la columna de entrada usada en la agregación."
+                          name="AggregationColumnId">#{Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el tipo de agregación."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica si la columna requiere tratamiento especial porque puede contener datos de tamaño excesivo o porque requiere mayor precisión que el tipo de datos float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación de cadenas."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Alquileres"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Alquileres"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">Hoja2$Área_de_impresió</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Importar Peliculas\Alquileres.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Alquileres.xlsx]"
+                  connectionManagerRefId="Package.ConnectionManagers[Alquileres.xlsx]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Pelicula]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Pelicula]"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Pelicula]"
+                      name="Pelicula"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Alquiler]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Alquiler]"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Alquiler]"
+                      name="F.Alquiler"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Devolucion]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Devolucion]"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[F.Devolucion]"
+                      name="F.Devolucion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Cliente]"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Cliente]"
+                      name="Cliente"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Empleado]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Empleado]"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].Columns[Empleado]"
+                      name="Empleado"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Pelicula]"
+                      dataType="wstr"
+                      length="255"
+                      name="Pelicula" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Alquiler]"
+                      dataType="date"
+                      name="F#Alquiler" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[F#Devolucion]"
+                      dataType="date"
+                      name="F#Devolucion" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Cliente]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cliente" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel].ExternalColumns[Empleado]"
+                      dataType="wstr"
+                      length="255"
+                      name="Empleado" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Pelicula]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Pelicula]"
+                      name="Pelicula" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Alquiler]"
+                      dataType="date"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Alquiler]"
+                      name="F#Alquiler" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Devolucion]"
+                      dataType="date"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[F#Devolucion]"
+                      name="F#Devolucion" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Cliente]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Cliente]"
+                      name="Cliente" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Empleado]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[Empleado]"
+                      name="Empleado" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Alquileres.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Conversión de datos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Conversión de datos.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[Pelicula]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Pelicula"
+                      lineageId="Package\Importar Peliculas\Agregado.Outputs[Salida de agregado 1].Columns[Pelicula]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\Importar Peliculas\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CPelicula]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CPelicula]"
+                      name="CPelicula"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Importar Peliculas\Agregado.Outputs[Salida de agregado 1].Columns[Pelicula]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\Importar Peliculas\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Conversión de datos 1"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Conversión de datos 1.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos 1.Inputs[Entrada de conversión de datos].Columns[Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cliente"
+                      lineageId="Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1].Columns[Cliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\Importar Peliculas\Conversión de datos 1.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]"
+                      name="Copia de Cliente"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1].Columns[Cliente]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\Importar Peliculas\Conversión de datos 1.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Destino de SQL Server"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5"
+              description="Destino de SQL Server"
+              name="Destino de SQL Server"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="El nombre del objeto de base de datos en el que copiar datos."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[Pelis].[Peliculas]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Importar Peliculas\Destino de SQL Server.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server]"
+                  hasSideEffects="true"
+                  name="Entrada de destino de SQL Server">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].Columns[CPelicula]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CPelicula"
+                      externalMetadataColumnId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[Titulo]"
+                      lineageId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CPelicula]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[idPelicula]"
+                      dataType="i4"
+                      name="idPelicula" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[Titulo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Titulo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Destino de SQL Server 1"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5"
+              description="Destino de SQL Server"
+              name="Destino de SQL Server 1"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="El nombre del objeto de base de datos en el que copiar datos."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[Pelis].[Clientes]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Importar Peliculas\Destino de SQL Server 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server]"
+                  hasSideEffects="true"
+                  name="Entrada de destino de SQL Server">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].Columns[Copia de Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copia de Cliente"
+                      externalMetadataColumnId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
+                      lineageId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].ExternalColumns[idCliente]"
+                      dataType="i4"
+                      name="idCliente" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Mapa de caracteres"
+              componentClassID="Microsoft.CharacterMap"
+              contactInfo="Mapa de caracteres;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Especifica las operaciones de cadena para aplicar."
+              name="Mapa de caracteres"
+              usesDispositions="true"
+              version="2">
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]"
+                  name="Entrada de mapa de caracteres">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Mapa de caracteres.Inputs[Entrada de mapa de caracteres].Columns[Pelicula]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Pelicula"
+                      errorOrTruncationOperation="Asignar columna"
+                      lineageId="Package\Importar Peliculas\Agregado.Outputs[Salida de agregado 1].Columns[Pelicula]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          dataType="System.UInt32"
+                          name="MapFlags"
+                          typeConverter="LCMappingType">16777472</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Mapa de caracteres.Outputs[Salida de mapa de caracteres]"
+                  exclusionGroup="1"
+                  name="Salida de mapa de caracteres"
+                  synchronousInputId="Package\Importar Peliculas\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Peliculas\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de mapa de caracteres"
+                  synchronousInputId="Package\Importar Peliculas\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Mapa de caracteres.Outputs[Salida de error de mapa de caracteres].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Mapa de caracteres 1"
+              componentClassID="Microsoft.CharacterMap"
+              contactInfo="Mapa de caracteres;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Especifica las operaciones de cadena para aplicar."
+              name="Mapa de caracteres 1"
+              usesDispositions="true"
+              version="2">
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Mapa de caracteres 1.Inputs[Entrada de mapa de caracteres]"
+                  name="Entrada de mapa de caracteres">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Mapa de caracteres 1.Inputs[Entrada de mapa de caracteres].Columns[Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cliente"
+                      errorOrTruncationOperation="Asignar columna"
+                      lineageId="Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1].Columns[Cliente]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          dataType="System.UInt32"
+                          name="MapFlags"
+                          typeConverter="LCMappingType">16777728</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Mapa de caracteres 1.Outputs[Salida de mapa de caracteres]"
+                  exclusionGroup="1"
+                  name="Salida de mapa de caracteres"
+                  synchronousInputId="Package\Importar Peliculas\Mapa de caracteres 1.Inputs[Entrada de mapa de caracteres]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Peliculas\Mapa de caracteres 1.Outputs[Salida de error de mapa de caracteres]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de mapa de caracteres"
+                  synchronousInputId="Package\Importar Peliculas\Mapa de caracteres 1.Inputs[Entrada de mapa de caracteres]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Mapa de caracteres 1.Outputs[Salida de error de mapa de caracteres].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Mapa de caracteres 1.Outputs[Salida de error de mapa de caracteres].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Importar Peliculas\Mapa de caracteres 1.Outputs[Salida de error de mapa de caracteres].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Importar Peliculas\Mapa de caracteres 1.Outputs[Salida de error de mapa de caracteres].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Importar Peliculas\Multidifusión"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multidifusión;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Distribuye cada fila de entrada a cada una de las filas de una o varias salidas. Por ejemplo, se crea una bifurcación de un flujo de datos para realizar una copia de los datos de modo que se puedan enmascarar algunos valores antes de compartirlos con los asociados externos."
+              name="Multidifusión">
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Multidifusión.Inputs[Entrada de Multidifusión 1]"
+                  name="Entrada de Multidifusión 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Importar Peliculas\Multidifusión.Outputs[Salida de Multidifusión 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Salida de Multidifusión 1"
+                  synchronousInputId="Package\Importar Peliculas\Multidifusión.Inputs[Entrada de Multidifusión 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Peliculas\Multidifusión.Outputs[Salida de multidifusión 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Salida de multidifusión 1"
+                  synchronousInputId="Package\Importar Peliculas\Multidifusión.Inputs[Entrada de Multidifusión 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Importar Peliculas\Multidifusión.Outputs[Salida de multidifusión 2]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Salida de multidifusión 2"
+                  synchronousInputId="Package\Importar Peliculas\Multidifusión.Inputs[Entrada de Multidifusión 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de agregado 1]"
+              endId="Package\Importar Peliculas\Mapa de caracteres.Inputs[Entrada de mapa de caracteres]"
+              name="Salida de agregado 1"
+              startId="Package\Importar Peliculas\Agregado.Outputs[Salida de agregado 1]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de agregado 11]"
+              endId="Package\Importar Peliculas\Mapa de caracteres 1.Inputs[Entrada de mapa de caracteres]"
+              name="Salida de agregado 1"
+              startId="Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de conversión de datos]"
+              endId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server]"
+              name="Salida de conversión de datos"
+              startId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de conversión de datos1]"
+              endId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server]"
+              name="Salida de conversión de datos"
+              startId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de mapa de caracteres]"
+              endId="Package\Importar Peliculas\Conversión de datos.Inputs[Entrada de conversión de datos]"
+              name="Salida de mapa de caracteres"
+              startId="Package\Importar Peliculas\Mapa de caracteres.Outputs[Salida de mapa de caracteres]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de mapa de caracteres1]"
+              endId="Package\Importar Peliculas\Conversión de datos 1.Inputs[Entrada de conversión de datos]"
+              name="Salida de mapa de caracteres"
+              startId="Package\Importar Peliculas\Mapa de caracteres 1.Outputs[Salida de mapa de caracteres]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de Multidifusión 1]"
+              endId="Package\Importar Peliculas\Agregado.Inputs[Entrada de agregado 1]"
+              name="Salida de Multidifusión 1"
+              startId="Package\Importar Peliculas\Multidifusión.Outputs[Salida de Multidifusión 1]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de multidifusión 1]"
+              endId="Package\Importar Peliculas\Agregado 1.Inputs[Entrada de agregado 1]"
+              name="Salida de multidifusión 1"
+              startId="Package\Importar Peliculas\Multidifusión.Outputs[Salida de multidifusión 1]" />
+            <path
+              refId="Package\Importar Peliculas.Paths[Salida de origen de Excel]"
+              endId="Package\Importar Peliculas\Multidifusión.Inputs[Entrada de Multidifusión 1]"
+              name="Salida de origen de Excel"
+              startId="Package\Importar Peliculas\Alquileres.Outputs[Salida de origen de Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Importar Peliculas"
+          TopLeft="282,117" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Importar Clientes"
+          TopLeft="465,119" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Importar Peliculas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Importar Peliculas\Conversión de datos"
+          TopLeft="205,434" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Importar Peliculas\Mapa de caracteres"
+          TopLeft="209,328" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Importar Peliculas\Destino de SQL Server"
+          TopLeft="206,580" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Importar Peliculas\Agregado"
+          TopLeft="226,232" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Importar Peliculas\Alquileres"
+          TopLeft="389.5,18.5" />
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de mapa de caracteres]"
+          TopLeft="293.5,370">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de conversión de datos]"
+          TopLeft="295.5,476">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,104"
+              Start="0,0"
+              End="0,96.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,96.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de agregado 1]"
+          TopLeft="291.25,274">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Importar Peliculas\Multidifusión"
+          TopLeft="374,105" />
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de origen de Excel]"
+          TopLeft="451.5,60.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8.5,44.5"
+              Start="0,0"
+              End="-8.5,37">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.25"
+                    Point2="0,22.25"
+                    Point3="-4,22.25" />
+                  <mssgle:LineSegment
+                    End="-4.5,22.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.5,22.25"
+                    Point2="-8.5,22.25"
+                    Point3="-8.5,26.25" />
+                  <mssgle:LineSegment
+                    End="-8.5,37" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de Multidifusión 1]"
+          TopLeft="443,147">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-155,85"
+              Start="0,0"
+              End="-155,77.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.5"
+                    Point2="0,42.5"
+                    Point3="-4,42.5" />
+                  <mssgle:LineSegment
+                    End="-151,42.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-151,42.5"
+                    Point2="-155,42.5"
+                    Point3="-155,46.5" />
+                  <mssgle:LineSegment
+                    End="-155,77.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Importar Peliculas\Mapa de caracteres 1"
+          TopLeft="480,325" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Importar Peliculas\Destino de SQL Server 1"
+          TopLeft="477,577" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Importar Peliculas\Agregado 1"
+          TopLeft="497,229" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Importar Peliculas\Conversión de datos 1"
+          TopLeft="476,431" />
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de mapa de caracteres1]"
+          TopLeft="564.5,367">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de conversión de datos1]"
+          TopLeft="566.5,473">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,104"
+              Start="0,0"
+              End="0,96.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,96.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de agregado 11]"
+          TopLeft="564.5,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de multidifusión 1]"
+          TopLeft="464.666666666667,147">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98.8333333333334,82"
+              Start="0,0"
+              End="98.8333333333334,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3638968481376" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.3638968481376"
+                    Point2="0,33.3638968481376"
+                    Point3="4,33.3638968481376" />
+                  <mssgle:LineSegment
+                    End="94.8333333333334,33.3638968481376" />
+                  <mssgle:CubicBezierSegment
+                    Point1="94.8333333333334,33.3638968481376"
+                    Point2="98.8333333333334,33.3638968481376"
+                    Point3="98.8333333333334,37.3638968481376" />
+                  <mssgle:LineSegment
+                    End="98.8333333333334,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Importar Peliculas\Destino de SQL Server">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Importar Peliculas\Alquileres">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Importar Clientes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Importar Clientes\Mapa de caracteres"
+          TopLeft="372,237" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Importar Clientes\Destino de SQL Server"
+          TopLeft="369,489" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Importar Clientes\Alquileres"
+          TopLeft="389.5,18.5" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Importar Clientes\Agregado"
+          TopLeft="389,141" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Importar Clientes\Conversión de datos"
+          TopLeft="368,343" />
+        <EdgeLayout
+          Id="Package\Importar Clientes.Paths[Salida de origen de Excel]"
+          TopLeft="451.25,60.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80.5"
+              Start="0,0"
+              End="0,73">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Clientes.Paths[Salida de mapa de caracteres]"
+          TopLeft="456.5,279">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Clientes.Paths[Salida de conversión de datos]"
+          TopLeft="458.5,385">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,104"
+              Start="0,0"
+              End="0,96.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,96.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Clientes.Paths[Salida de agregado 1]"
+          TopLeft="454.25,183">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Importar Clientes\Destino de SQL Server">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
