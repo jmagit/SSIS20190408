@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/8/2019 3:34:53 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="JAVIER-LAPTOP"
+  DTS:CreatorName="JAVIER-LAPTOP\Javier"
+  DTS:DTSID="{46BCA973-6F32-4BB5-B192-A9B4C3100A30}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{D2DEF3BA-9749-45E8-B050-1F6C02F74DC4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>
