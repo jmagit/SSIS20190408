@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Curso", "Curso\Curso.dtproj", "{F9DA35F8-A8B8-4853-A83D-FEEB368BA8DF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{024E6F09-EC00-4B86-BB54-24F57FC6A2B7}"
+	ProjectSection(SolutionItems) = preProject
+		Productos.csv = Productos.csv
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
