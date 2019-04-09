@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{DAC80A3E-1056-4D44-AE16-3BC4B563B625}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{30941134-6E56-4F71-9509-800C20DAA8B5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -984,6 +984,113 @@
               </outputs>
             </component>
             <component
+              refId="Package\Importar Peliculas\Clientes"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5"
+              description="Destino de SQL Server"
+              name="Clientes"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="El nombre del objeto de base de datos en el que copiar datos."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[Pelis].[Clientes]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Importar Peliculas\Clientes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Clientes.Inputs[Entrada de destino de SQL Server]"
+                  hasSideEffects="true"
+                  name="Entrada de destino de SQL Server">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Clientes.Inputs[Entrada de destino de SQL Server].Columns[Copia de Cliente]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copia de Cliente"
+                      externalMetadataColumnId="Package\Importar Peliculas\Clientes.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
+                      lineageId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Clientes.Inputs[Entrada de destino de SQL Server].ExternalColumns[idCliente]"
+                      dataType="i4"
+                      name="idCliente" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Clientes.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
               refId="Package\Importar Peliculas\Conversión de datos"
               componentClassID="Microsoft.DataConvert"
               contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
@@ -1136,220 +1243,6 @@
                   <externalMetadataColumns />
                 </output>
               </outputs>
-            </component>
-            <component
-              refId="Package\Importar Peliculas\Destino de SQL Server"
-              componentClassID="Microsoft.SQLServerDestination"
-              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5"
-              description="Destino de SQL Server"
-              name="Destino de SQL Server"
-              version="5">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.String"
-                  description="El nombre del objeto de base de datos en el que copiar datos."
-                  expressionType="Notify"
-                  name="BulkInsertTableName">[Pelis].[Peliculas]</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva."
-                  name="BulkInsertCheckConstraints">true</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
-                  expressionType="Notify"
-                  name="BulkInsertFirstRow">-1</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva."
-                  name="BulkInsertFireTriggers">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva."
-                  name="BulkInsertKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
-                  name="BulkInsertKeepNulls">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
-                  expressionType="Notify"
-                  name="BulkInsertLastRow">-1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva."
-                  name="BulkInsertMaxErrors">-1</property>
-                <property
-                  dataType="System.String"
-                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
-                  expressionType="Notify"
-                  name="BulkInsertOrder"></property>
-                <property
-                  dataType="System.Boolean"
-                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva."
-                  name="BulkInsertTablock">true</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
-                  expressionType="Notify"
-                  name="Timeout">30</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos."
-                  name="MaxInsertCommitSize">0</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Importar Peliculas\Destino de SQL Server.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
-                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server]"
-                  hasSideEffects="true"
-                  name="Entrada de destino de SQL Server">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].Columns[CPelicula]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="CPelicula"
-                      externalMetadataColumnId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[Titulo]"
-                      lineageId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CPelicula]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[idPelicula]"
-                      dataType="i4"
-                      name="idPelicula" />
-                    <externalMetadataColumn
-                      refId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server].ExternalColumns[Titulo]"
-                      dataType="wstr"
-                      length="255"
-                      name="Titulo" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-            </component>
-            <component
-              refId="Package\Importar Peliculas\Destino de SQL Server 1"
-              componentClassID="Microsoft.SQLServerDestination"
-              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5"
-              description="Destino de SQL Server"
-              name="Destino de SQL Server 1"
-              version="5">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.String"
-                  description="El nombre del objeto de base de datos en el que copiar datos."
-                  expressionType="Notify"
-                  name="BulkInsertTableName">[Pelis].[Clientes]</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva."
-                  name="BulkInsertCheckConstraints">true</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
-                  expressionType="Notify"
-                  name="BulkInsertFirstRow">-1</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva."
-                  name="BulkInsertFireTriggers">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva."
-                  name="BulkInsertKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
-                  name="BulkInsertKeepNulls">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
-                  expressionType="Notify"
-                  name="BulkInsertLastRow">-1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva."
-                  name="BulkInsertMaxErrors">-1</property>
-                <property
-                  dataType="System.String"
-                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
-                  expressionType="Notify"
-                  name="BulkInsertOrder"></property>
-                <property
-                  dataType="System.Boolean"
-                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva."
-                  name="BulkInsertTablock">true</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
-                  expressionType="Notify"
-                  name="Timeout">30</property>
-                <property
-                  dataType="System.Int32"
-                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos."
-                  name="MaxInsertCommitSize">0</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Importar Peliculas\Destino de SQL Server 1.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
-                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server]"
-                  hasSideEffects="true"
-                  name="Entrada de destino de SQL Server">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].Columns[Copia de Cliente]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Copia de Cliente"
-                      externalMetadataColumnId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
-                      lineageId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos].Columns[Copia de Cliente]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].ExternalColumns[idCliente]"
-                      dataType="i4"
-                      name="idCliente" />
-                    <externalMetadataColumn
-                      refId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server].ExternalColumns[Nombre]"
-                      dataType="wstr"
-                      length="255"
-                      name="Nombre" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
             </component>
             <component
               refId="Package\Importar Peliculas\Mapa de caracteres"
@@ -1519,6 +1412,113 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Importar Peliculas\Peliculas"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5"
+              description="Destino de SQL Server"
+              name="Peliculas"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="El nombre del objeto de base de datos en el que copiar datos."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[Pelis].[Peliculas]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Importar Peliculas\Peliculas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CursoSSIS1]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Importar Peliculas\Peliculas.Inputs[Entrada de destino de SQL Server]"
+                  hasSideEffects="true"
+                  name="Entrada de destino de SQL Server">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Importar Peliculas\Peliculas.Inputs[Entrada de destino de SQL Server].Columns[CPelicula]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CPelicula"
+                      externalMetadataColumnId="Package\Importar Peliculas\Peliculas.Inputs[Entrada de destino de SQL Server].ExternalColumns[Titulo]"
+                      lineageId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CPelicula]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Peliculas.Inputs[Entrada de destino de SQL Server].ExternalColumns[idPelicula]"
+                      dataType="i4"
+                      name="idPelicula" />
+                    <externalMetadataColumn
+                      refId="Package\Importar Peliculas\Peliculas.Inputs[Entrada de destino de SQL Server].ExternalColumns[Titulo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Titulo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
           </components>
           <paths>
             <path
@@ -1533,12 +1533,12 @@
               startId="Package\Importar Peliculas\Agregado 1.Outputs[Salida de agregado 1]" />
             <path
               refId="Package\Importar Peliculas.Paths[Salida de conversión de datos]"
-              endId="Package\Importar Peliculas\Destino de SQL Server.Inputs[Entrada de destino de SQL Server]"
+              endId="Package\Importar Peliculas\Peliculas.Inputs[Entrada de destino de SQL Server]"
               name="Salida de conversión de datos"
               startId="Package\Importar Peliculas\Conversión de datos.Outputs[Salida de conversión de datos]" />
             <path
               refId="Package\Importar Peliculas.Paths[Salida de conversión de datos1]"
-              endId="Package\Importar Peliculas\Destino de SQL Server 1.Inputs[Entrada de destino de SQL Server]"
+              endId="Package\Importar Peliculas\Clientes.Inputs[Entrada de destino de SQL Server]"
               name="Salida de conversión de datos"
               startId="Package\Importar Peliculas\Conversión de datos 1.Outputs[Salida de conversión de datos]" />
             <path
@@ -1570,6 +1570,21 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Flujo de datos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{763E7F65-08E3-4D84-A67A-4438976C6F7F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Flujo de datos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
@@ -1584,319 +1599,20 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
+          Size="161,42"
+          Id="Package\Importar Clientes"
+          TopLeft="465,119" />
+        <NodeLayout
           Size="164,42"
           Id="Package\Importar Peliculas"
           TopLeft="282,117" />
         <NodeLayout
-          Size="161,42"
-          Id="Package\Importar Clientes"
-          TopLeft="465,119" />
+          Size="176,42"
+          Id="Package\Tarea Flujo de datos"
+          TopLeft="288,223" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
-  <TaskHost
-    design-time-name="Package\Importar Peliculas">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="175,42"
-          Id="Package\Importar Peliculas\Conversión de datos"
-          TopLeft="205,434" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Importar Peliculas\Mapa de caracteres"
-          TopLeft="209,328" />
-        <NodeLayout
-          Size="185,42"
-          Id="Package\Importar Peliculas\Destino de SQL Server"
-          TopLeft="206,580" />
-        <NodeLayout
-          Size="124,42"
-          Id="Package\Importar Peliculas\Agregado"
-          TopLeft="226,232" />
-        <NodeLayout
-          Size="124,42"
-          Id="Package\Importar Peliculas\Alquileres"
-          TopLeft="389.5,18.5" />
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de mapa de caracteres]"
-          TopLeft="293.5,370">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,64"
-              Start="0,0"
-              End="0,56.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,56.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de conversión de datos]"
-          TopLeft="295.5,476">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,104"
-              Start="0,0"
-              End="0,96.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,96.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de agregado 1]"
-          TopLeft="291.25,274">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,54"
-              Start="0,0"
-              End="0,46.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,46.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="138,42"
-          Id="Package\Importar Peliculas\Multidifusión"
-          TopLeft="374,105" />
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de origen de Excel]"
-          TopLeft="451.5,60.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-8.5,44.5"
-              Start="0,0"
-              End="-8.5,37">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.25"
-                    Point2="0,22.25"
-                    Point3="-4,22.25" />
-                  <mssgle:LineSegment
-                    End="-4.5,22.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4.5,22.25"
-                    Point2="-8.5,22.25"
-                    Point3="-8.5,26.25" />
-                  <mssgle:LineSegment
-                    End="-8.5,37" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de Multidifusión 1]"
-          TopLeft="443,147">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-155,85"
-              Start="0,0"
-              End="-155,77.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,38.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,38.5"
-                    Point2="0,42.5"
-                    Point3="-4,42.5" />
-                  <mssgle:LineSegment
-                    End="-151,42.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-151,42.5"
-                    Point2="-155,42.5"
-                    Point3="-155,46.5" />
-                  <mssgle:LineSegment
-                    End="-155,77.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Importar Peliculas\Mapa de caracteres 1"
-          TopLeft="480,325" />
-        <NodeLayout
-          Size="185,42"
-          Id="Package\Importar Peliculas\Destino de SQL Server 1"
-          TopLeft="477,577" />
-        <NodeLayout
-          Size="133,42"
-          Id="Package\Importar Peliculas\Agregado 1"
-          TopLeft="497,229" />
-        <NodeLayout
-          Size="175,42"
-          Id="Package\Importar Peliculas\Conversión de datos 1"
-          TopLeft="476,431" />
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de mapa de caracteres1]"
-          TopLeft="564.5,367">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,64"
-              Start="0,0"
-              End="0,56.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,56.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de conversión de datos1]"
-          TopLeft="566.5,473">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,104"
-              Start="0,0"
-              End="0,96.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,96.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de agregado 11]"
-          TopLeft="564.5,271">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,54"
-              Start="0,0"
-              End="0,46.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,46.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Importar Peliculas.Paths[Salida de multidifusión 1]"
-          TopLeft="464.666666666667,147">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="98.8333333333334,82"
-              Start="0,0"
-              End="98.8333333333334,74.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.3638968481376" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.3638968481376"
-                    Point2="0,33.3638968481376"
-                    Point3="4,33.3638968481376" />
-                  <mssgle:LineSegment
-                    End="94.8333333333334,33.3638968481376" />
-                  <mssgle:CubicBezierSegment
-                    Point1="94.8333333333334,33.3638968481376"
-                    Point2="98.8333333333334,33.3638968481376"
-                    Point3="98.8333333333334,37.3638968481376" />
-                  <mssgle:LineSegment
-                    End="98.8333333333334,74.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Importar Peliculas\Destino de SQL Server">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Importar Peliculas\Alquileres">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Importar Clientes">
     <LayoutInfo>
@@ -2018,6 +1734,333 @@
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Importar Peliculas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="116,42"
+          Id="Package\Importar Peliculas\Clientes"
+          TopLeft="477,577" />
+        <NodeLayout
+          Size="119,42"
+          Id="Package\Importar Peliculas\Peliculas"
+          TopLeft="206,580" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Importar Peliculas\Conversión de datos"
+          TopLeft="205,434" />
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Importar Peliculas\Multidifusión"
+          TopLeft="374,105" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Importar Peliculas\Mapa de caracteres 1"
+          TopLeft="480,325" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Importar Peliculas\Conversión de datos 1"
+          TopLeft="476,431" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Importar Peliculas\Mapa de caracteres"
+          TopLeft="209,328" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Importar Peliculas\Agregado"
+          TopLeft="226,232" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Importar Peliculas\Agregado 1"
+          TopLeft="497,229" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Importar Peliculas\Alquileres"
+          TopLeft="389.5,18.5" />
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de origen de Excel]"
+          TopLeft="451.5,60.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8.5,44.5"
+              Start="0,0"
+              End="-8.5,37">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.25"
+                    Point2="0,22.25"
+                    Point3="-4,22.25" />
+                  <mssgle:LineSegment
+                    End="-4.5,22.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.5,22.25"
+                    Point2="-8.5,22.25"
+                    Point3="-8.5,26.25" />
+                  <mssgle:LineSegment
+                    End="-8.5,37" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de multidifusión 1]"
+          TopLeft="464.666666666667,147">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98.8333333333334,82"
+              Start="0,0"
+              End="98.8333333333334,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3638968481376" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.3638968481376"
+                    Point2="0,33.3638968481376"
+                    Point3="4,33.3638968481376" />
+                  <mssgle:LineSegment
+                    End="94.8333333333334,33.3638968481376" />
+                  <mssgle:CubicBezierSegment
+                    Point1="94.8333333333334,33.3638968481376"
+                    Point2="98.8333333333334,33.3638968481376"
+                    Point3="98.8333333333334,37.3638968481376" />
+                  <mssgle:LineSegment
+                    End="98.8333333333334,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de Multidifusión 1]"
+          TopLeft="443,147">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-155,85"
+              Start="0,0"
+              End="-155,77.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.5"
+                    Point2="0,42.5"
+                    Point3="-4,42.5" />
+                  <mssgle:LineSegment
+                    End="-151,42.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-151,42.5"
+                    Point2="-155,42.5"
+                    Point3="-155,46.5" />
+                  <mssgle:LineSegment
+                    End="-155,77.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de mapa de caracteres1]"
+          TopLeft="564.5,367">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de mapa de caracteres]"
+          TopLeft="293.5,370">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de conversión de datos1]"
+          TopLeft="563.5,473">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-28.5,104"
+              Start="0,0"
+              End="-28.5,96.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48"
+                    Point2="0,52"
+                    Point3="-4,52" />
+                  <mssgle:LineSegment
+                    End="-24.5,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-24.5,52"
+                    Point2="-28.5,52"
+                    Point3="-28.5,56" />
+                  <mssgle:LineSegment
+                    End="-28.5,96.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de conversión de datos]"
+          TopLeft="292.5,476">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-27,104"
+              Start="0,0"
+              End="-27,96.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48"
+                    Point2="0,52"
+                    Point3="-4,52" />
+                  <mssgle:LineSegment
+                    End="-23,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-23,52"
+                    Point2="-27,52"
+                    Point3="-27,56" />
+                  <mssgle:LineSegment
+                    End="-27,96.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de agregado 11]"
+          TopLeft="564.5,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Importar Peliculas.Paths[Salida de agregado 1]"
+          TopLeft="291.25,274">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Importar Peliculas\Peliculas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Importar Peliculas\Alquileres">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
