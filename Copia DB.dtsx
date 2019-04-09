@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/9/2019 4:45:06 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="JAVIER-LAPTOP"
+  DTS:CreatorName="JAVIER-LAPTOP\Javier"
+  DTS:DTSID="{8026A34D-9144-462D-9DB5-923D74496519}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="CDW_JAVIER-LAPTOP_JAVIER-LAPTOP_0"
+  DTS:PackageType="6"
+  DTS:VersionGUID="{DC9DC4D1-2CD4-4BA3-9C14-0D4120DCF288}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:CreationName="Microsoft.LogProviderEventLog"
+      DTS:DTSID="{A37EA751-24B4-4D58-8218-97BB9EE12A37}"
+      DTS:ObjectName="{A37EA751-24B4-4D58-8218-97BB9EE12A37}">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:LoggingMode="1">
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{A37EA751-24B4-4D58-8218-97BB9EE12A37}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tarea JAVIER-LAPTOP_JAVIER-LAPTOP_Transfer Objects"
+      DTS:CreationName="Microsoft.TransferObjectsTask"
+      DTS:DTSID="{670FC3B4-39DF-4FBC-A495-CFF935F431AD}"
+      DTS:ExecutableType="Microsoft.TransferObjectsTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea JAVIER-LAPTOP_JAVIER-LAPTOP_Transfer Objects"
+      DTS:TaskContact="SQL Objects Transfer Task; Microsoft Corporation; Microsoft SQL Server v9; � 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <TaskData
+          TaskProductVersion="9"
+          TaskServicePackVersion="2" xmlns="www.microsoft.com/sqlserver/dts/tasks/transferobjectstask">
+          <TransferType
+            Name="SmoTransfer"
+            LogTransferDumps="False" xmlns="" />
+          <SourceServer
+            Name="JAVIER-LAPTOP"
+            UseTrustedAuthentication="WindowsAuthentication" xmlns="" />
+          <DestinationServer
+            Name="JAVIER-LAPTOP"
+            UseTrustedAuthentication="WindowsAuthentication" xmlns="" />
+          <Databases xmlns="">
+            <DatabaseObject
+              Name="AdventureWorks2017"
+              DestName="AdventureWorks2017Copia"
+              TypeOfCopy="CopyToDestination"
+              ExistInDestinationDatabase="StopTransfer"
+              OverwriteFile="False">
+              <DatabaseFiles>
+                <DatabaseFile
+                  SourceLocalPath="D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017.mdf"
+                  SharedFilePath="D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017.mdf"
+                  FileType="DatabaseFile"
+                  DestinationFilePath="D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017Copia.mdf" />
+                <DatabaseFile
+                  SourceLocalPath="D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017_log.ldf"
+                  SharedFilePath="D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017_log.ldf"
+                  FileType="LogFile"
+                  DestinationFilePath="D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017Copia_log.ldf" />
+              </DatabaseFiles>
+            </DatabaseObject>
+          </Databases>
+        </TaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+</DTS:Executable>

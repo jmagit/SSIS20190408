@@ -1,0 +1,178 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/9/2019 4:35:12 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="JAVIER-LAPTOP"
+  DTS:CreatorName="JAVIER-LAPTOP\Javier"
+  DTS:DTSID="{07D2524D-6012-4845-A869-82A3C13B84FE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="Copiar RRHH"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{7BD71566-AC36-4027-B59D-2D40314081B1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[.]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{57058747-F52C-4E82-9578-E2664CF6B72D}"
+      DTS:ObjectName=".">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=.;UseWindowsAuthentication=True;UserName=;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[estadisticas]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{61040A5A-4824-4909-AEB7-729232FE0105}"
+      DTS:ObjectName="estadisticas">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="D:\Trabajo\Cursos\SSIS\SSIS20190408\estadisticas" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.AdventureWorks2017]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{CB9B0781-2557-499D-B1D4-CED0A86E418D}"
+      DTS:ObjectName="localhost.AdventureWorks2017">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=AdventureWorks2017;Integrated Security=True;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tarea de generación de perfiles de datos"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Tarea de generación de perfiles de datos"
+      DTS:DTSID="{D265BD9D-27BA-40AF-9552-59AA391FDC0D}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea de generación de perfiles de datos"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="estadisticas"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{CB9B0781-2557-499D-B1D4-CED0A86E418D}</DataSourceID>
+        <Table Schema="Production" Table="Product" />
+        <Column IsWildCard="false" ColumnName="Style" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{CB9B0781-2557-499D-B1D4-CED0A86E418D}</DataSourceID>
+        <Table Schema="Production" Table="Product" />
+        <Column IsWildCard="false" ColumnName="Name" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{CB9B0781-2557-499D-B1D4-CED0A86E418D}</DataSourceID>
+        <Table Schema="Production" Table="Product" />
+        <Column IsWildCard="false" ColumnName="Style" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Transferir bases de datos"
+      DTS:CreationName="Microsoft.TransferDatabaseTask"
+      DTS:Description="Tarea Transferir bases de datos"
+      DTS:Disabled="True"
+      DTS:DTSID="{D308F181-1BF9-49F2-B868-460210829923}"
+      DTS:ExecutableType="Microsoft.TransferDatabaseTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Transferir bases de datos"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <TransferDatabasesTaskData
+          SrcConn="{57058747-F52C-4E82-9578-E2664CF6B72D}"
+          DestConn="{57058747-F52C-4E82-9578-E2664CF6B72D}"
+          Method="1"
+          SrcDBName="AdventureWorks2017"
+          ReattachSrcDB="True"
+          SrcDBFiles="&quot;AdventureWorks2017.mdf&quot;,&quot;D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA&quot;,&quot;&quot;;&quot;AdventureWorks2017_log.ldf&quot;,&quot;D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA&quot;,&quot;&quot;"
+          DestDBName="AdventureWorksCopia"
+          DestDBFiles="&quot;AdventureWorksCopia.mdf&quot;,&quot;D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA&quot;,&quot;&quot;;&quot;AdventureWorksCopia_log.ldf&quot;,&quot;D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA&quot;,&quot;&quot;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Transferir objetos de SQL Server"
+      DTS:CreationName="Microsoft.TransferSqlServerObjectsTask"
+      DTS:Description="Tarea Transferir objetos de SQL Server"
+      DTS:Disabled="True"
+      DTS:DTSID="{EE357FE0-CC0A-4D75-9455-949E6E3371D1}"
+      DTS:ExecutableType="Microsoft.TransferSqlServerObjectsTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Transferir objetos de SQL Server"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <TransferSqlServerObjectsTaskData
+          SourceConnection="{57058747-F52C-4E82-9578-E2664CF6B72D}"
+          DestinationConnection="{57058747-F52C-4E82-9578-E2664CF6B72D}"
+          SourceDatabase="AdventureWorks2017"
+          DestinationDatabase="CursoSSIS"
+          TablesList="6,29,[HumanResources].[Department],27,[HumanResources].[Employee],44,[HumanResources].[EmployeeDepartmentHistory],37,[HumanResources].[EmployeePayHistory],31,[HumanResources].[JobCandidate],24,[HumanResources].[Shift],"
+          CopyIndexes="True"
+          CopyTriggers="True"
+          CopyPrimaryKeys="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Tarea Transferir bases de datos"
+          TopLeft="282.5,61.5" />
+        <NodeLayout
+          Size="263,42"
+          Id="Package\Tarea Transferir objetos de SQL Server"
+          TopLeft="208.5,178.5" />
+        <NodeLayout
+          Size="272,42"
+          Id="Package\Tarea de generación de perfiles de datos"
+          TopLeft="670,136" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
