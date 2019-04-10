@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Transpasa actores con eventos"
   DTS:PackageType="5"
-  DTS:VersionBuild="23"
-  DTS:VersionGUID="{F0C9FDBA-19A5-4DDA-8379-439BFAEC14E3}">
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{04B6AF9E-B976-417D-9FC2-DBE98A81503D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -560,6 +560,7 @@
       DTS:CreationName="Microsoft.SendMailTask"
       DTS:DelayValidation="True"
       DTS:Description="Tarea Enviar correo"
+      DTS:Disabled="True"
       DTS:DTSID="{4CD9417E-9C7B-4CBD-BF1D-7E08F4CD6E78}"
       DTS:ExecutableType="Microsoft.SendMailTask"
       DTS:LocaleID="-1"
@@ -586,6 +587,7 @@
       DTS:CreationName="Microsoft.SendMailTask"
       DTS:DelayValidation="True"
       DTS:Description="Tarea Enviar correo"
+      DTS:Disabled="True"
       DTS:DTSID="{2C0AA50C-17FF-49B4-B27D-199153D2A049}"
       DTS:ExecutableType="Microsoft.SendMailTask"
       DTS:LocaleID="-1"
