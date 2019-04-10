@@ -6,13 +6,14 @@
   DTS:CreatorComputerName="JAVIER-LAPTOP"
   DTS:CreatorName="JAVIER-LAPTOP\Javier"
   DTS:DTSID="{06425715-85B9-4143-BFB3-B4BC1240603A}"
+  DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="15.0.1100.123"
   DTS:LocaleID="3082"
   DTS:ObjectName="Carga actores"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{CAB99A66-0BE8-4596-9EAE-A0033A30AB78}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{8B89A09F-AB1E-410A-B591-62C6DD5925DF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -438,33 +439,21 @@
         <NodeLayout
           Size="185,42"
           Id="Package\Tarea Flujo de datos\Destino de SQL Server"
-          TopLeft="355,167" />
+          TopLeft="351,167" />
         <EdgeLayout
           Id="Package\Tarea Flujo de datos.Paths[Salida de origen de archivo plano]"
-          TopLeft="439.5,100">
+          TopLeft="441.5,100">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="8,67"
+              EndConnector="0,67"
               Start="0,0"
-              End="8,59.5">
+              End="0,59.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.5"
-                    Point2="0,33.5"
-                    Point3="4,33.5" />
-                  <mssgle:LineSegment
-                    End="4,33.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="4,33.5"
-                    Point2="8,33.5"
-                    Point3="8,37.5" />
-                  <mssgle:LineSegment
-                    End="8,59.5" />
+                    End="0,59.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

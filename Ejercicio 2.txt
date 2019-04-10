@@ -1,0 +1,16 @@
+Crear 2 paquetes
+	Exporta Actores -> csv
+	Importa Actores <- csv
+Flujo principal
+	Crear directorio origen
+	Exportar actores en el
+	Crear directorio destino
+	Mover CSV
+	Borrar directorio origen
+	Importar Actores
+	Borrar directorio destino
+	Reindexar tabla y estadisticas
+	Copia de seguridad de la BD
+	Notificar exito
+
+Los errores se notifican con un email.
