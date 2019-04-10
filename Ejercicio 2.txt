@@ -14,3 +14,13 @@ Flujo principal
 	Notificar exito
 
 Los errores se notifican con un email.
+
+Modularizar con contenedores.
+Parametros para:
+	Nombres de directorios
+	El fichero
+	Correos electrónicos
+Variables para:
+	Ficheros
+Expresiones:
+	Contenido del email con detalle del paquete, ejecución ... (variables del sistema)
