@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
+  DTS:CheckpointFileName="D:\Trabajo\Cursos\SSIS\SSIS20190408\checkpoins"
+  DTS:CheckpointUsage="1"
   DTS:CreationDate="4/10/2019 10:23:08 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="JAVIER-LAPTOP"
@@ -11,8 +13,9 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Dinamico"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{0AA37395-42AF-4F84-8CD4-9FC3B63E4A85}">
+  DTS:SaveCheckpoints="True"
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{D47F688F-5DE9-4CED-BB00-4CA4CF64D1D7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -274,6 +277,16 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LOCALHOST]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{FCC65CC7-AD38-46C8-AB88-5AC7781BA21F}"
+      DTS:ObjectName="LOCALHOST">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=LOCALHOST;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Productos.csv]"
       DTS:CreationName="FILE"
       DTS:DTSID="{59D75CF0-309E-4D90-A947-D52A96FD202B}"
@@ -285,7 +298,39 @@
           DTS:ConnectionString="D:\Trabajo\Cursos\SSIS\SSIS20190408\Productos.csv" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[registro.log]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{FF493EFB-0E8F-4A3A-9803-3803C36907EA}"
+      DTS:ObjectName="registro.log">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="D:\Trabajo\Cursos\SSIS\SSIS20190408\registro.log" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="registro.log"
+      DTS:CreationName="Microsoft.LogProviderTextFile"
+      DTS:Description="Escribe entradas del registro sobre eventos en un archivo CSV"
+      DTS:DTSID="{D2DD0005-33B5-4B31-A5D1-1AFA05BEABDA}"
+      DTS:ObjectName="Proveedor de registro SSIS para archivos de texto">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+    <DTS:LogProvider
+      DTS:CreationName="Microsoft.LogProviderEventLog"
+      DTS:Description="Escribe entradas del registro sobre eventos en el Registro de eventos"
+      DTS:DTSID="{F1262F21-FF6E-4DC3-A8DC-245ABCB6B1BC}"
+      DTS:ObjectName="Proveedor de registro SSIS para el Registro de eventos de Windows">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
   <DTS:PackageParameters>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -337,6 +382,55 @@
         DTS:DataType="8">D:\Trabajo\Cursos\SSIS\SSIS20190408\ficheros</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">2,7,OnError,13,OnInformation</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{D2DD0005-33B5-4B31-A5D1-1AFA05BEABDA}" />
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{F1262F21-FF6E-4DC3-A8DC-245ABCB6B1BC}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Contenedor de bucles For"
@@ -351,6 +445,8 @@
       DTS:MaxConcurrent="1"
       DTS:ObjectName="Contenedor de bucles For">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
       <DTS:Executables>
         <DTS:Executable
           DTS:refId="Package\Contenedor de bucles For\Ver Fichero"
@@ -362,12 +458,55 @@
           DTS:ObjectName="Ver Fichero"
           DTS:ThreadHint="1">
           <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
           <DTS:PropertyExpression
-            DTS:Name="Arguments">@[User::dirTrabajo] + "\\Alquileres" + (DT_WSTR, 4) @[User::año]  +".csv"</DTS:PropertyExpression>
+            DTS:Name="Arguments">@[User::dirTrabajo] + "\\Alquileress" + (DT_WSTR, 4) @[User::año]  +".csv"</DTS:PropertyExpression>
+          <DTS:EventHandlers>
+            <DTS:EventHandler
+              DTS:refId="Package\Contenedor de bucles For\Ver Fichero.EventHandlers[OnError]"
+              DTS:CreationName="OnError"
+              DTS:DTSID="{52F3A0D9-8101-4631-A02E-D1C7B2DF76D8}"
+              DTS:EventID="0"
+              DTS:EventName="OnError"
+              DTS:LocaleID="-1">
+              <DTS:Variables>
+                <DTS:Variable
+                  DTS:CreationName=""
+                  DTS:Description="La propiedad de propagación del evento"
+                  DTS:DTSID="{4360987E-CC64-46E6-B78A-A9323ED7494E}"
+                  DTS:IncludeInDebugDump="6789"
+                  DTS:Namespace="System"
+                  DTS:ObjectName="Propagate">
+                  <DTS:VariableValue
+                    DTS:DataType="11">-1</DTS:VariableValue>
+                </DTS:Variable>
+              </DTS:Variables>
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\Contenedor de bucles For\Ver Fichero.EventHandlers[OnError]\Tarea Enviar correo"
+                  DTS:CreationName="Microsoft.SendMailTask"
+                  DTS:Description="Tarea Enviar correo"
+                  DTS:DTSID="{F855BAAF-1588-4F2B-A571-385EEFA0971E}"
+                  DTS:ExecutableType="Microsoft.SendMailTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Tarea Enviar correo">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <SendMailTask:SendMailTaskData
+                      SendMailTask:SMTPServer="{FCC65CC7-AD38-46C8-AB88-5AC7781BA21F}"
+                      SendMailTask:From="kk@kk.kk"
+                      SendMailTask:To="oper@kk.kk"
+                      SendMailTask:Subject="Error" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+            </DTS:EventHandler>
+          </DTS:EventHandlers>
           <DTS:ObjectData>
             <ExecuteProcessData
               Executable="notepad.exe"
-              Arguments="D:\Trabajo\Cursos\SSIS\SSIS20190408\ficheros\Alquileres0.csv" />
+              Arguments="D:\Trabajo\Cursos\SSIS\SSIS20190408\ficheros\Alquileress0.csv" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -411,6 +550,8 @@
             xml:space="preserve"></DTS:VariableValue>
         </DTS:Variable>
       </DTS:Variables>
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
       <DTS:Executables>
         <DTS:Executable
           DTS:refId="Package\Contenedor de bucles Foreach\Ver Fichero"
@@ -422,6 +563,8 @@
           DTS:ObjectName="Ver Fichero"
           DTS:ThreadHint="2">
           <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
           <DTS:PropertyExpression
             DTS:Name="Arguments">@[User::nomFichero]</DTS:PropertyExpression>
           <DTS:ObjectData>
@@ -449,6 +592,8 @@
       DTS:ObjectName="Copia"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
       <DTS:PropertyExpression
         DTS:Name="OverwriteDestinationFile">@[User::contador] &gt; 0</DTS:PropertyExpression>
       <DTS:ObjectData>
@@ -468,6 +613,8 @@
       DTS:ObjectName="Crea"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
       <DTS:ObjectData>
         <FileSystemData
           TaskOperationType="CreateDirectory"
@@ -485,6 +632,8 @@
       DTS:ObjectName="Incrementa contador"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
       <DTS:ObjectData>
         <ExpressionTask
           Expression="@[User::contador] =  @[User::contador] + 1" />
@@ -500,6 +649,8 @@
       DTS:ObjectName="Tarea Flujo de datos"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -1377,6 +1528,47 @@
       DTS:ObjectName="Restricción 1"
       DTS:To="Package\Copia" />
   </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{E680499D-F09A-4C19-8749-3ACE104D6F93}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="La propiedad de propagación del evento"
+          DTS:DTSID="{8EC71CD6-E876-4B92-ACC0-F80F7BAFBA1B}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Tarea Enviar correo"
+          DTS:CreationName="Microsoft.SendMailTask"
+          DTS:Description="Tarea Enviar correo"
+          DTS:DTSID="{42dc48d8-806d-410e-a821-11265c13753a}"
+          DTS:ExecutableType="Microsoft.SendMailTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tarea Enviar correo">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{FCC65CC7-AD38-46C8-AB88-5AC7781BA21F}"
+              SendMailTask:From="kk@kk.kk"
+              SendMailTask:To="oper@kk.kk"
+              SendMailTask:Subject="Error" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
 <!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
@@ -1538,5 +1730,29 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Contenedor de bucles For\Ver Fichero.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Contenedor de bucles For\Ver Fichero.EventHandlers[OnError]\Tarea Enviar correo"
+          TopLeft="483,108" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package.EventHandlers[OnError]\Tarea Enviar correo"
+          TopLeft="520,199" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
