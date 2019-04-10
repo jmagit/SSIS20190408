@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Transpasa actores"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{B92AA8DF-50D2-43A0-A4BD-1CDB9BA2F96E}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{52EFD1DA-999F-4E83-BE89-22C893EB927A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -38,6 +38,17 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Backup]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{14E73B16-E5ED-4C94-AD3D-7642E6BDA574}"
+      DTS:ObjectName="Backup">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="3"
+          DTS:ConnectionString="D:\Trabajo\Cursos\SSIS\SSIS20190408\Backup" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[destino]"
       DTS:CreationName="FILE"
       DTS:DTSID="{C998A21B-93E2-4FD8-9456-8F4547117E7F}"
@@ -46,6 +57,16 @@
         <DTS:ConnectionManager
           DTS:FileUsageType="3"
           DTS:ConnectionString="D:\Trabajo\Cursos\SSIS\SSIS20190408\destino" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LOCALHOST]"
+      DTS:CreationName="ADO.NET:SQL"
+      DTS:DTSID="{D0F136BC-2139-4E87-A25B-61B8585ACBC1}"
+      DTS:ObjectName="LOCALHOST">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Integrated Security=SSPI;Connect Timeout=30;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -69,139 +90,434 @@
           DTS:ConnectionString="D:\Trabajo\Cursos\SSIS\SSIS20190408\origen" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Servidor SMTP]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{DAE93C4E-458D-4C24-A065-34E7897D9ADD}"
+      DTS:ObjectName="Servidor SMTP">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=localhost;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Borra destino"
-      DTS:CreationName="Microsoft.FileSystemTask"
-      DTS:Description="Tarea Sistema de archivos"
-      DTS:DTSID="{91D315FE-B971-48DB-8C2C-0E03870CDF4C}"
-      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:refId="Package\Actualizar estadísticas"
+      DTS:CreationName="Microsoft.DbMaintenanceUpdateStatisticsTask"
+      DTS:Description="Tarea Actualizar estadísticas"
+      DTS:DTSID="{A70DA7DF-E832-42F3-84FE-37FF14BC5CDF}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceUpdateStatisticsTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Borra destino"
+      DTS:ObjectName="Actualizar estadísticas"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
-        <FileSystemData
-          TaskOperationType="DeleteDirectory"
-          TaskSourcePath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}"
-          TaskDestinationPath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}" />
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D0F136BC-2139-4E87-A25B-61B8585ACBC1}"
+          SQLTask:DatabaseSelectionType="4"
+          SQLTask:TableSelectionType="2"
+          SQLTask:ObjectType="0"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False"
+          SQLTask:UpdateStatisticsType="2"
+          SQLTask:UpdateScanType="3"
+          SQLTask:UpdateSampleValue="50" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:SelectedDatabases
+            SQLTask:DatabaseName="CursoSSIS" />
+          <SQLTask:SelectedTables
+            SQLTask:TableName="Pelis.Actores" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Borra origen"
+      DTS:refId="Package\Carpeta Backup"
       DTS:CreationName="Microsoft.FileSystemTask"
       DTS:Description="Tarea Sistema de archivos"
-      DTS:DTSID="{211B4B3B-481A-4BA1-8C50-9B8641AC79FF}"
+      DTS:DTSID="{170BEF83-25C3-4A79-B966-8A97F5B1AE24}"
       DTS:ExecutableType="Microsoft.FileSystemTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Borra origen"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <FileSystemData
-          TaskOperationType="DeleteDirectory"
-          TaskSourcePath="{D6705E78-37E4-4522-B72B-D8983EF9270E}" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Carga"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:Description="Tarea Ejecutar paquete"
-      DTS:DTSID="{95703750-BDF6-41AD-8302-AEA59241542F}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Carga"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <UseProjectReference>True</UseProjectReference>
-          <PackageName>Carga actores.dtsx</PackageName>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Crea destino"
-      DTS:CreationName="Microsoft.FileSystemTask"
-      DTS:Description="Tarea Sistema de archivos"
-      DTS:DTSID="{3EBC748E-545C-4AD6-8D88-0126D9461784}"
-      DTS:ExecutableType="Microsoft.FileSystemTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Crea destino"
-      DTS:ThreadHint="0">
+      DTS:ObjectName="Carpeta Backup"
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <FileSystemData
           TaskOperationType="CreateDirectory"
-          TaskSourcePath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}" />
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="{14E73B16-E5ED-4C94-AD3D-7642E6BDA574}" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Crea origen"
-      DTS:CreationName="Microsoft.FileSystemTask"
-      DTS:Description="Tarea Sistema de archivos"
-      DTS:DTSID="{6DCB8DAA-0FC1-4842-A3AF-BBE814806483}"
-      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:refId="Package\Contenedor de secuencias"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contenedor de secuencias"
+      DTS:DTSID="{54BF6F30-3058-4F98-8D44-DDC4CFDE3FA3}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Crea origen"
+      DTS:ObjectName="Contenedor de secuencias">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Borra destino"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="Tarea Sistema de archivos"
+          DTS:DTSID="{91D315FE-B971-48DB-8C2C-0E03870CDF4C}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Borra destino"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteDirectory"
+              TaskSourcePath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}"
+              TaskDestinationPath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Borra origen"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="Tarea Sistema de archivos"
+          DTS:DTSID="{211B4B3B-481A-4BA1-8C50-9B8641AC79FF}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Borra origen"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteDirectory"
+              TaskSourcePath="{D6705E78-37E4-4522-B72B-D8983EF9270E}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Carga"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarea Ejecutar paquete"
+          DTS:DTSID="{95703750-BDF6-41AD-8302-AEA59241542F}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Carga"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Carga actores.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Crea destino"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="Tarea Sistema de archivos"
+          DTS:DTSID="{3EBC748E-545C-4AD6-8D88-0126D9461784}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Crea destino"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="CreateDirectory"
+              TaskSourcePath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Crea origen"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="Tarea Sistema de archivos"
+          DTS:DTSID="{6DCB8DAA-0FC1-4842-A3AF-BBE814806483}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Crea origen"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="CreateDirectory"
+              TaskSourcePath="{D6705E78-37E4-4522-B72B-D8983EF9270E}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Mueve fichero"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="Tarea Sistema de archivos"
+          DTS:DTSID="{5F0E459C-3D3E-491F-936D-434A41A16BB1}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Mueve fichero"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskSourcePath="{A407ABD2-8949-4A0F-801D-244815ED452D}"
+              TaskDestinationPath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Saca"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Tarea Ejecutar paquete"
+          DTS:DTSID="{6D6D328C-D8E0-4707-BB77-6DCBDEB6E2A0}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Saca"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Saca actores.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Tarea Ejecutar SQL"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{B45368D0-68E0-42E6-9B8F-F12AD538A809}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tarea Ejecutar SQL"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{E603CD90-B0A4-49B0-A683-0D985B486C36}"
+              SQLTask:SqlStatementSource="delete [Pelis].[Actores]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción]"
+          DTS:CreationName=""
+          DTS:DTSID="{ECB28D9E-BC88-464A-89F8-64A13B1BB7CD}"
+          DTS:From="Package\Contenedor de secuencias\Crea origen"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción"
+          DTS:To="Package\Contenedor de secuencias\Saca" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{E5613DB6-B90B-4B9F-89AC-ED0D6F74328C}"
+          DTS:From="Package\Contenedor de secuencias\Crea destino"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 1"
+          DTS:To="Package\Contenedor de secuencias\Mueve fichero" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{9447B2DB-F557-4E72-8E2A-A18A858EBD89}"
+          DTS:From="Package\Contenedor de secuencias\Saca"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 2"
+          DTS:To="Package\Contenedor de secuencias\Crea destino" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{BF2FD0E3-E2E7-4F26-A3E5-E45C2F777D38}"
+          DTS:From="Package\Contenedor de secuencias\Mueve fichero"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 3"
+          DTS:To="Package\Contenedor de secuencias\Carga" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{6429FB62-399A-45AC-AD57-2EF1857F9645}"
+          DTS:From="Package\Contenedor de secuencias\Mueve fichero"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 4"
+          DTS:To="Package\Contenedor de secuencias\Borra origen" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{191E4A8F-A5BB-4C04-B9C7-460BB79DEBB0}"
+          DTS:From="Package\Contenedor de secuencias\Carga"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 5"
+          DTS:To="Package\Contenedor de secuencias\Borra destino" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{0F3C8341-4FCD-482C-8B2C-CB04FC8537BC}"
+          DTS:From="Package\Contenedor de secuencias\Saca"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 6"
+          DTS:To="Package\Contenedor de secuencias\Tarea Ejecutar SQL" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{AAEE29DE-3764-4F0E-A14B-65C0619D61C0}"
+          DTS:From="Package\Contenedor de secuencias\Tarea Ejecutar SQL"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 7"
+          DTS:To="Package\Contenedor de secuencias\Carga" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Copia de seguridad"
+      DTS:CreationName="Microsoft.DbMaintenanceBackupTask"
+      DTS:Description="Tarea Copia de seguridad de la base de datos"
+      DTS:DTSID="{8A7C2C8E-C719-46DF-9D32-CDDC9C0C6D4C}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceBackupTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copia de seguridad"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
-        <FileSystemData
-          TaskOperationType="CreateDirectory"
-          TaskSourcePath="{D6705E78-37E4-4522-B72B-D8983EF9270E}" />
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D0F136BC-2139-4E87-A25B-61B8585ACBC1}"
+          SQLTask:DatabaseSelectionType="4"
+          SQLTask:ServerVersion="14"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False"
+          SQLTask:BackupAction="0"
+          SQLTask:BackupIsIncremental="False"
+          SQLTask:BackupFileGroupsFiles=""
+          SQLTask:BackupDeviceType="2"
+          SQLTask:BackupPhysicalDestinationType="2"
+          SQLTask:BackupDestinationType="0"
+          SQLTask:BackupDestinationAutoFolderPath="D:\Trabajo\Cursos\SSIS\SSIS20190408\Backup"
+          SQLTask:BackupActionForExistingBackups="0"
+          SQLTask:BackupCreateSubFolder="False"
+          SQLTask:BackupFileExtension=""
+          SQLTask:BackupVerifyIntegrity="False"
+          SQLTask:ExpireDate="2019-04-24T00:00:00"
+          SQLTask:RetainDays="14"
+          SQLTask:InDays="True"
+          SQLTask:UseExpiration="True"
+          SQLTask:BackupCompressionAction="0"
+          SQLTask:CopyOnlyBackup="False"
+          SQLTask:IgnoreReplicaType="False"
+          SQLTask:CredentialName=""
+          SQLTask:ContainerName=""
+          SQLTask:UrlPrefix=""
+          SQLTask:IsBackupEncrypted="False"
+          SQLTask:BackupEncryptionAlgorithm="0"
+          SQLTask:BackupEncryptorType="0"
+          SQLTask:BackupEncryptorName=""
+          SQLTask:Checksum="False"
+          SQLTask:ContinueOnError="False"
+          SQLTask:IsBlockSizeUsed="False"
+          SQLTask:IsMaxTransferSizeUsed="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:SelectedDatabases
+            SQLTask:DatabaseName="CursoSSIS" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Mueve fichero"
-      DTS:CreationName="Microsoft.FileSystemTask"
-      DTS:Description="Tarea Sistema de archivos"
-      DTS:DTSID="{5F0E459C-3D3E-491F-936D-434A41A16BB1}"
-      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:refId="Package\Correo KO"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Tarea Enviar correo"
+      DTS:DTSID="{CC1FB9E3-339B-49C9-AE74-B1F259E88F09}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Mueve fichero"
+      DTS:ObjectName="Correo KO"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{DAE93C4E-458D-4C24-A065-34E7897D9ADD}"
+          SendMailTask:From="ssis@kk.kk"
+          SendMailTask:To="operador@kk.kk"
+          SendMailTask:Subject="Se han producido errores al ejecutar el paquete" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Correo OK"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Tarea Enviar correo"
+      DTS:DTSID="{4283C014-7311-4AB4-9BD2-3E8A40E039E8}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Correo OK"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
-        <FileSystemData
-          TaskOperationType="MoveFile"
-          TaskSourcePath="{A407ABD2-8949-4A0F-801D-244815ED452D}"
-          TaskDestinationPath="{C998A21B-93E2-4FD8-9456-8F4547117E7F}" />
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{DAE93C4E-458D-4C24-A065-34E7897D9ADD}"
+          SendMailTask:From="ssis@kk.kk"
+          SendMailTask:To="oprador@kk.kk"
+          SendMailTask:Subject="El paquete se ha ejecutado correctamente" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Saca"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:Description="Tarea Ejecutar paquete"
-      DTS:DTSID="{6D6D328C-D8E0-4707-BB77-6DCBDEB6E2A0}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:refId="Package\Limpieza de mantenimiento"
+      DTS:CreationName="Microsoft.DbMaintenanceFileCleanupTask"
+      DTS:Description="Tarea Limpieza de mantenimiento"
+      DTS:DTSID="{F6EE7F8A-5406-4D5A-8AA2-6D1B7B9DCBBE}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceFileCleanupTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Saca"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <UseProjectReference>True</UseProjectReference>
-          <PackageName>Saca actores.dtsx</PackageName>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Tarea Ejecutar SQL"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Tarea Ejecutar SQL"
-      DTS:DTSID="{B45368D0-68E0-42E6-9B8F-F12AD538A809}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Tarea Ejecutar SQL"
+      DTS:ObjectName="Limpieza de mantenimiento"
       DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{E603CD90-B0A4-49B0-A683-0D985B486C36}"
-          SQLTask:SqlStatementSource="delete [Pelis].[Actores]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{D0F136BC-2139-4E87-A25B-61B8585ACBC1}"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False"
+          SQLTask:FileTypeSelected="0"
+          SQLTask:FilePath=""
+          SQLTask:FolderPath="D:\Trabajo\Cursos\SSIS\SSIS20190408\Backup"
+          SQLTask:CleanSubFolders="False"
+          SQLTask:FileExtension="bak"
+          SQLTask:AgeBased="True"
+          SQLTask:DeleteSpecificFile="False"
+          SQLTask:RemoveOlderThan="4"
+          SQLTask:TimeUnitsType="1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Regenerar índices"
+      DTS:CreationName="Microsoft.DbMaintenanceReindexTask"
+      DTS:Description="Tarea Volver a generar índice"
+      DTS:DTSID="{B79470D8-E022-495E-81C0-C2C097EE071C}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceReindexTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Regenerar índices"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D0F136BC-2139-4E87-A25B-61B8585ACBC1}"
+          SQLTask:DatabaseSelectionType="4"
+          SQLTask:TableSelectionType="2"
+          SQLTask:ObjectType="0"
+          SQLTask:ServerVersion="14"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False"
+          SQLTask:UseOriginalAmount="True"
+          SQLTask:Percentage="20"
+          SQLTask:Sort="False"
+          SQLTask:KeepOnline="False"
+          SQLTask:SkipUnsupported="False"
+          SQLTask:PadIndex="True"
+          SQLTask:MaximumDegreeOfParallelismUsed="False"
+          SQLTask:LowPriorityUsed="False"
+          SQLTask:CheckFragmentationPercentUsed="True"
+          SQLTask:CheckPageCountUsed="False"
+          SQLTask:FragmentationOp="Fast"
+          SQLTask:FragmentationPercent="15"
+          SQLTask:CheckLastUsageInDaysUsed="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:SelectedDatabases
+            SQLTask:DatabaseName="CursoSSIS" />
+          <SQLTask:SelectedTables
+            SQLTask:TableName="Pelis.Actores" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -209,67 +525,67 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción]"
       DTS:CreationName=""
-      DTS:DTSID="{ECB28D9E-BC88-464A-89F8-64A13B1BB7CD}"
-      DTS:From="Package\Crea origen"
+      DTS:DTSID="{D2022818-710F-400F-8D46-F3A1FDDF5024}"
+      DTS:From="Package\Actualizar estadísticas"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción"
-      DTS:To="Package\Saca" />
+      DTS:To="Package\Copia de seguridad" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
       DTS:CreationName=""
-      DTS:DTSID="{E5613DB6-B90B-4B9F-89AC-ED0D6F74328C}"
-      DTS:From="Package\Crea destino"
-      DTS:LogicalAnd="True"
+      DTS:DTSID="{84419F8A-0901-4740-974E-E43E9B2A0EDF}"
+      DTS:From="Package\Contenedor de secuencias"
       DTS:ObjectName="Restricción 1"
-      DTS:To="Package\Mueve fichero" />
+      DTS:To="Package\Correo KO"
+      DTS:Value="1" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 2]"
       DTS:CreationName=""
-      DTS:DTSID="{9447B2DB-F557-4E72-8E2A-A18A858EBD89}"
-      DTS:From="Package\Saca"
+      DTS:DTSID="{9214F924-7E3B-4769-BAC9-99CB2E6888F3}"
+      DTS:From="Package\Regenerar índices"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 2"
-      DTS:To="Package\Crea destino" />
+      DTS:To="Package\Actualizar estadísticas" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 3]"
       DTS:CreationName=""
-      DTS:DTSID="{BF2FD0E3-E2E7-4F26-A3E5-E45C2F777D38}"
-      DTS:From="Package\Mueve fichero"
+      DTS:DTSID="{7C239388-9123-4CDA-83FC-1642FFD7EAB3}"
+      DTS:From="Package\Copia de seguridad"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 3"
-      DTS:To="Package\Carga" />
+      DTS:To="Package\Correo OK" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 4]"
       DTS:CreationName=""
-      DTS:DTSID="{6429FB62-399A-45AC-AD57-2EF1857F9645}"
-      DTS:From="Package\Mueve fichero"
-      DTS:LogicalAnd="True"
+      DTS:DTSID="{582470E1-6C19-4017-B1ED-3B3AF7E8D0AF}"
+      DTS:From="Package\Copia de seguridad"
       DTS:ObjectName="Restricción 4"
-      DTS:To="Package\Borra origen" />
+      DTS:To="Package\Correo KO"
+      DTS:Value="1" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 5]"
       DTS:CreationName=""
-      DTS:DTSID="{191E4A8F-A5BB-4C04-B9C7-460BB79DEBB0}"
-      DTS:From="Package\Carga"
+      DTS:DTSID="{933C5745-E8C5-4DD1-95A3-5F2DFD0FCFF2}"
+      DTS:From="Package\Carpeta Backup"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 5"
-      DTS:To="Package\Borra destino" />
+      DTS:To="Package\Limpieza de mantenimiento" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 6]"
       DTS:CreationName=""
-      DTS:DTSID="{0F3C8341-4FCD-482C-8B2C-CB04FC8537BC}"
-      DTS:From="Package\Saca"
+      DTS:DTSID="{6AC23096-3F77-411F-9AB6-518490222E92}"
+      DTS:From="Package\Contenedor de secuencias"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 6"
-      DTS:To="Package\Tarea Ejecutar SQL" />
+      DTS:To="Package\Regenerar índices" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 7]"
       DTS:CreationName=""
-      DTS:DTSID="{AAEE29DE-3764-4F0E-A14B-65C0619D61C0}"
-      DTS:From="Package\Tarea Ejecutar SQL"
+      DTS:DTSID="{B424A24A-5072-46B2-BA35-D461555DDFCD}"
+      DTS:From="Package\Contenedor de secuencias"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 7"
-      DTS:To="Package\Carga" />
+      DTS:To="Package\Carpeta Backup" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
@@ -282,120 +598,78 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="142,42"
-          Id="Package\Borra destino"
-          TopLeft="291,441" />
+          Id="Package\Contenedor de secuencias\Borra destino"
+          TopLeft="203.285714285715,413.142857142857" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 5]"
+          TopLeft="274.285714285715,346.142857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <NodeLayout
           Size="137,42"
-          Id="Package\Borra origen"
-          TopLeft="584,329" />
+          Id="Package\Contenedor de secuencias\Borra origen"
+          TopLeft="496.285714285715,301.142857142857" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 4]"
+          TopLeft="488.619047619047,250.142857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="76.1666666666667,51.0000000000001"
+              Start="0,0"
+              End="76.1666666666667,43.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.7339699863574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.7339699863574"
+                    Point2="0,20.7339699863574"
+                    Point3="4,20.7339699863574" />
+                  <mssgle:LineSegment
+                    End="72.1666666666667,20.7339699863574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="72.1666666666667,20.7339699863574"
+                    Point2="76.1666666666667,20.7339699863574"
+                    Point3="76.1666666666667,24.7339699863574" />
+                  <mssgle:LineSegment
+                    End="76.1666666666667,43.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <NodeLayout
           Size="106,42"
-          Id="Package\Carga"
-          TopLeft="309,332" />
-        <NodeLayout
-          Size="138,42"
-          Id="Package\Crea destino"
-          TopLeft="489,143" />
-        <NodeLayout
-          Size="133,42"
-          Id="Package\Crea origen"
-          TopLeft="113,48" />
-        <NodeLayout
-          Size="145,42"
-          Id="Package\Mueve fichero"
-          TopLeft="481,236" />
-        <NodeLayout
-          Size="101,42"
-          Id="Package\Saca"
-          TopLeft="385,43" />
-        <NodeLayout
-          Size="170,42"
-          Id="Package\Tarea Ejecutar SQL"
-          TopLeft="208,184" />
+          Id="Package\Contenedor de secuencias\Carga"
+          TopLeft="221.285714285715,304.142857142857" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="246,66.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="139,0"
-              Start="0,0"
-              End="131.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="131.5,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="555.75,185">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,51"
-              Start="0,0"
-              End="0,43.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 2]"
-          TopLeft="451,85">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="107,58"
-              Start="0,0"
-              End="107,50.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.7426900584795" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.7426900584795"
-                    Point2="0,23.7426900584795"
-                    Point3="4,23.7426900584795" />
-                  <mssgle:LineSegment
-                    End="103,23.7426900584795" />
-                  <mssgle:CubicBezierSegment
-                    Point1="103,23.7426900584795"
-                    Point2="107,23.7426900584795"
-                    Point3="107,27.7426900584795" />
-                  <mssgle:LineSegment
-                    End="107,50.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 3]"
-          TopLeft="530.666666666667,278">
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 3]"
+          TopLeft="442.952380952381,250.142857142857">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -428,31 +702,69 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 4]"
-          TopLeft="576.333333333333,278">
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 7]"
+          TopLeft="205.285714285715,198.142857142857">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="76.1666666666666,51"
+              EndConnector="52.6666666666667,106"
               Start="0,0"
-              End="76.1666666666666,43.5">
+              End="52.6666666666667,98.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.7339699863574" />
+                    End="0,58.6542750929368" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,16.7339699863574"
-                    Point2="0,20.7339699863574"
-                    Point3="4,20.7339699863574" />
+                    Point1="0,58.6542750929368"
+                    Point2="0,62.6542750929368"
+                    Point3="4,62.6542750929368" />
                   <mssgle:LineSegment
-                    End="72.1666666666666,20.7339699863574" />
+                    End="48.6666666666667,62.6542750929368" />
                   <mssgle:CubicBezierSegment
-                    Point1="72.1666666666666,20.7339699863574"
-                    Point2="76.1666666666666,20.7339699863574"
-                    Point3="76.1666666666666,24.7339699863574" />
+                    Point1="48.6666666666667,62.6542750929368"
+                    Point2="52.6666666666667,62.6542750929368"
+                    Point3="52.6666666666667,66.6542750929368" />
                   <mssgle:LineSegment
-                    End="76.1666666666666,43.5" />
+                    End="52.6666666666667,98.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Contenedor de secuencias\Crea destino"
+          TopLeft="401.285714285715,115.142857142857" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 2]"
+          TopLeft="363.285714285715,57.1428571428571">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="107,58"
+              Start="0,0"
+              End="107,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.7426900584795" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.7426900584795"
+                    Point2="0,23.7426900584795"
+                    Point3="4,23.7426900584795" />
+                  <mssgle:LineSegment
+                    End="103,23.7426900584795" />
+                  <mssgle:CubicBezierSegment
+                    Point1="103,23.7426900584795"
+                    Point2="107,23.7426900584795"
+                    Point3="107,27.7426900584795" />
+                  <mssgle:LineSegment
+                    End="107,50.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -462,19 +774,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 5]"
-          TopLeft="362,374">
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 1]"
+          TopLeft="468.035714285715,157.142857142857">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,67"
+              EndConnector="0,51"
               Start="0,0"
-              End="0,59.5">
+              End="0,43.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,59.5" />
+                    End="0,43.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -483,9 +795,43 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Contenedor de secuencias\Crea origen"
+          TopLeft="25.2857142857143,20.1428571428571" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 6]"
-          TopLeft="420,85">
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción]"
+          TopLeft="158.285714285715,38.6428571428571">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="139,0"
+              Start="0,0"
+              End="131.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="131.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Contenedor de secuencias\Mueve fichero"
+          TopLeft="393.285714285715,208.142857142857" />
+        <NodeLayout
+          Size="101,42"
+          Id="Package\Contenedor de secuencias\Saca"
+          TopLeft="297.285714285715,15.1428571428572" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 6]"
+          TopLeft="332.285714285715,57.1428571428571">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -517,32 +863,265 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Contenedor de secuencias\Tarea Ejecutar SQL"
+          TopLeft="120.285714285714,156.142857142857" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="658,479"
+          Size="658,522"
+          Id="Package\Contenedor de secuencias"
+          TopLeft="33.8571428571429,71" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\Correo OK"
+          TopLeft="829.142857142857,658" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\Correo KO"
+          TopLeft="621.857142857143,658.571428571429" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Regenerar índices"
+          TopLeft="811.714285714286,330.571428571429" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Actualizar estadísticas"
+          TopLeft="800.571428571429,429" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Limpieza de mantenimiento"
+          TopLeft="770,224" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Copia de seguridad"
+          TopLeft="807.428571428572,542" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 7]"
-          TopLeft="293,226">
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="362.857142857143,593">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="52.6666666666667,106"
+              EndConnector="302.666666666666,65.5714285714287"
               Start="0,0"
-              End="52.6666666666667,98.5">
+              End="302.666666666666,58.0714285714287">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,58.6542750929368" />
+                    End="0,34.8533659186848" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,58.6542750929368"
-                    Point2="0,62.6542750929368"
-                    Point3="4,62.6542750929368" />
+                    Point1="0,34.8533659186848"
+                    Point2="0,38.8533659186848"
+                    Point3="4,38.8533659186848" />
                   <mssgle:LineSegment
-                    End="48.6666666666667,62.6542750929368" />
+                    End="298.666666666666,38.8533659186848" />
                   <mssgle:CubicBezierSegment
-                    Point1="48.6666666666667,62.6542750929368"
-                    Point2="52.6666666666667,62.6542750929368"
-                    Point3="52.6666666666667,66.6542750929368" />
+                    Point1="298.666666666666,38.8533659186848"
+                    Point2="302.666666666666,38.8533659186848"
+                    Point3="302.666666666666,42.8533659186848" />
                   <mssgle:LineSegment
-                    End="52.6666666666667,98.5" />
+                    End="302.666666666666,58.0714285714287" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="139.804641927083,43.8533659186848,23.0573828125,9.421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 2]"
+          TopLeft="892.392857142857,372.571428571429">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.4285714285714"
+              Start="0,0"
+              End="0,48.9285714285714">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.9285714285714" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="891.75,471">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 3]"
+          TopLeft="892.285714285714,584">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 4]"
+          TopLeft="865.095238095239,584">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-159.904761904763,74.5714285714287"
+              Start="0,0"
+              End="-159.904761904763,67.0714285714287">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.1437056708877" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.1437056708877"
+                    Point2="0,37.1437056708877"
+                    Point3="-4,37.1437056708877" />
+                  <mssgle:LineSegment
+                    End="-155.904761904763,37.1437056708877" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-155.904761904763,37.1437056708877"
+                    Point2="-159.904761904763,37.1437056708877"
+                    Point3="-159.904761904763,41.1437056708877" />
+                  <mssgle:LineSegment
+                    End="-159.904761904763,67.0714285714287" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-91.4810723586313,42.1437056708877,23.0573828125,9.421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 6]"
+          TopLeft="691.857142857143,417.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="119.857142857143,-66.095238095238"
+              Start="0,0"
+              End="112.357142857143,-66.095238095238">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="44.1626104987449,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44.1626104987449,0"
+                    Point2="48.1626104987449,0"
+                    Point3="48.1626104987449,-4" />
+                  <mssgle:LineSegment
+                    End="48.1626104987449,-62.095238095238" />
+                  <mssgle:CubicBezierSegment
+                    Point1="48.1626104987449,-62.095238095238"
+                    Point2="48.1626104987449,-66.095238095238"
+                    Point3="52.1626104987449,-66.095238095238" />
+                  <mssgle:LineSegment
+                    End="112.357142857143,-66.095238095238" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Carpeta Backup"
+          TopLeft="791,131" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 7]"
+          TopLeft="691.857142857143,246.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99.1428571428571,-94.3333333333333"
+              Start="0,0"
+              End="91.6428571428571,-94.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="35.8389173851359,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.8389173851359,0"
+                    Point2="39.8389173851359,0"
+                    Point3="39.8389173851359,-4" />
+                  <mssgle:LineSegment
+                    End="39.8389173851359,-90.3333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.8389173851359,-90.3333333333333"
+                    Point2="39.8389173851359,-94.3333333333333"
+                    Point3="43.8389173851359,-94.3333333333333" />
+                  <mssgle:LineSegment
+                    End="91.6428571428571,-94.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 5]"
+          TopLeft="871,173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.0000000000001"
+              Start="0,0"
+              End="0,43.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
