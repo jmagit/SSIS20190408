@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Saca actores"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{722FDA46-A99F-47C3-A167-DD15EF75E947}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{FEF04596-46BE-4927-9BC7-202BA0338A89}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAKf3nw9BlWECgEEfikWTZ9AAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACiURQ8FNblCYxPq7GBYdnEy12keBkw9hjcrs/NkF6I6gAAAAAOgAAAAAIAACAAAACKY4Q7D/r84pseQlEFbRdiEj6nie/LeXrlmnFqeOHzxBAAAACtV2xzphDulDMP421VAZw2QAAAADKvwehDQPboT3FYPavMS2uxFDMOA+LJkViBoNLz9riCZ7ELEkABt4nwcdQC2E04dacppx005WZrI/PLnkL1zto</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAKf3nw9BlWECgEEfikWTZ9AAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACS09aTgKFRyz4/AnSzy9EWBhVas1+S5V8hVEJEtj7PywAAAAAOgAAAAAIAACAAAAB6TLwn4ItMokcNpSL9ayI3jwQkDjHi/bIzNwY4I7d5dxAAAABI638hmHRGnZCIDgI+mfZrQAAAABowvy7KVjCfQlUcoel9wb/7rpYPOS6hzP9UVUALWUIK9M6gVErFYSIBeh7mQkn/TYSmmWu0xWsa1/gdqkABvoY</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -36,6 +36,8 @@
       DTS:CreationName="FLATFILE"
       DTS:DTSID="{88B37998-63C0-4C1F-A95E-E88C5EA661F2}"
       DTS:ObjectName="Administrador de conexiones de archivos planos">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::fichero]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -86,6 +88,18 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{9DD4E08E-BB46-49D6-864B-15BF74382405}"
+      DTS:ObjectName="fichero"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">D:\Trabajo\Cursos\SSIS\SSIS20190408\origen\actores.csv</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable

@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Transpasa actores"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{52EFD1DA-999F-4E83-BE89-22C893EB927A}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{EBBBBD0D-44A6-45EC-89E4-32696FB998CB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -21,6 +21,8 @@
       DTS:CreationName="FILE"
       DTS:DTSID="{A407ABD2-8949-4A0F-801D-244815ED452D}"
       DTS:ObjectName="actores.csv">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::fichOrigen]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="D:\Trabajo\Cursos\SSIS\SSIS20190408\origen\actores.csv" />
@@ -31,6 +33,8 @@
       DTS:CreationName="FILE"
       DTS:DTSID="{93F2EC11-B415-4BD6-985E-187654B85307}"
       DTS:ObjectName="actores.csv 1">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::fichDestino]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:FileUsageType="1"
@@ -53,6 +57,8 @@
       DTS:CreationName="FILE"
       DTS:DTSID="{C998A21B-93E2-4FD8-9456-8F4547117E7F}"
       DTS:ObjectName="destino">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::dirDestino]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:FileUsageType="3"
@@ -84,6 +90,8 @@
       DTS:CreationName="FILE"
       DTS:DTSID="{D6705E78-37E4-4522-B72B-D8983EF9270E}"
       DTS:ObjectName="origen">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::dirOrigen]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:FileUsageType="2"
@@ -101,7 +109,81 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
-  <DTS:Variables />
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{A18BFFC3-CEC2-4D37-8FBC-F26369DA6607}"
+      DTS:ObjectName="fichero">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">actores.csv</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{93253A4A-7F47-462F-8F8B-54DBD02F7A68}"
+      DTS:ObjectName="subdirDestino">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">destino</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{B66C27D4-22E6-4CF2-9138-8A474A42F9C0}"
+      DTS:ObjectName="subdirOrigen">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">origen</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{39D9AF67-5A5D-4C72-8AAC-4682B5BE9654}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::dirBase] + &quot;\\&quot; +  @[$Package::subdirDestino]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dirDestino">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\Trabajo\Cursos\SSIS\SSIS20190408\destino</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{643DF98F-CE50-46F1-96ED-60195E0D905B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::dirBase] + &quot;\\&quot; +  @[$Package::subdirOrigen]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dirOrigen">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\Trabajo\Cursos\SSIS\SSIS20190408\origen</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4A787EDC-03C5-41FD-A682-D38E7D5AAD89}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::dirDestino] + &quot;\\&quot; +  @[$Package::fichero]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fichDestino">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\Trabajo\Cursos\SSIS\SSIS20190408\destino\actores.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{392227D5-362D-4840-90A2-C7FEE20D493E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::dirOrigen]  + &quot;\\&quot; +  @[$Package::fichero]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fichOrigen">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\Trabajo\Cursos\SSIS\SSIS20190408\origen\actores.csv</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Actualizar estadísticas"
@@ -208,6 +290,10 @@
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
               <PackageName>Carga actores.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>Fichero</ParameterName>
+                <BindedVariableOrParameterName>User::fichDestino</BindedVariableOrParameterName>
+              </ParameterAssignment>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -274,6 +360,10 @@
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
               <PackageName>Saca actores.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>fichero</ParameterName>
+                <BindedVariableOrParameterName>User::fichOrigen</BindedVariableOrParameterName>
+              </ParameterAssignment>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -417,6 +507,7 @@
     <DTS:Executable
       DTS:refId="Package\Correo KO"
       DTS:CreationName="Microsoft.SendMailTask"
+      DTS:DelayValidation="True"
       DTS:Description="Tarea Enviar correo"
       DTS:DTSID="{CC1FB9E3-339B-49C9-AE74-B1F259E88F09}"
       DTS:ExecutableType="Microsoft.SendMailTask"
@@ -424,17 +515,25 @@
       DTS:ObjectName="Correo KO"
       DTS:ThreadHint="2">
       <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="FromLine">@[$Project::emailFrom]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="MessageSource">"El paquete " + @[System::PackageName] + "\nejecutado el " + (DT_WSTR, 20)  @[System::StartTime]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ToLine">@[$Project::emailTo]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <SendMailTask:SendMailTaskData
           SendMailTask:SMTPServer="{DAE93C4E-458D-4C24-A065-34E7897D9ADD}"
           SendMailTask:From="ssis@kk.kk"
-          SendMailTask:To="operador@kk.kk"
-          SendMailTask:Subject="Se han producido errores al ejecutar el paquete" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          SendMailTask:To="operador@kk"
+          SendMailTask:Subject="Se han producido errores al ejecutar el paquete"
+          SendMailTask:MessageSource="El paquete Transpasa actores&#xA;ejecutado el 10/04/2019 8:36:45" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Correo OK"
       DTS:CreationName="Microsoft.SendMailTask"
+      DTS:DelayValidation="True"
       DTS:Description="Tarea Enviar correo"
       DTS:DTSID="{4283C014-7311-4AB4-9BD2-3E8A40E039E8}"
       DTS:ExecutableType="Microsoft.SendMailTask"
@@ -442,11 +541,15 @@
       DTS:ObjectName="Correo OK"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="FromLine">@[$Project::emailFrom]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ToLine">@[$Project::emailTo]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <SendMailTask:SendMailTaskData
           SendMailTask:SMTPServer="{DAE93C4E-458D-4C24-A065-34E7897D9ADD}"
           SendMailTask:From="ssis@kk.kk"
-          SendMailTask:To="oprador@kk.kk"
+          SendMailTask:To="operador@kk"
           SendMailTask:Subject="El paquete se ha ejecutado correctamente" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -1002,37 +1105,37 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 4]"
-          TopLeft="865.095238095239,584">
+          TopLeft="865.095238095238,584">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-159.904761904763,74.5714285714287"
+              EndConnector="-159.904761904762,74.5714285714287"
               Start="0,0"
-              End="-159.904761904763,67.0714285714287">
+              End="-159.904761904762,67.0714285714287">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.1437056708877" />
+                    End="0,33.1437056708878" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,33.1437056708877"
-                    Point2="0,37.1437056708877"
-                    Point3="-4,37.1437056708877" />
+                    Point1="0,33.1437056708878"
+                    Point2="0,37.1437056708878"
+                    Point3="-4,37.1437056708878" />
                   <mssgle:LineSegment
-                    End="-155.904761904763,37.1437056708877" />
+                    End="-155.904761904762,37.1437056708878" />
                   <mssgle:CubicBezierSegment
-                    Point1="-155.904761904763,37.1437056708877"
-                    Point2="-159.904761904763,37.1437056708877"
-                    Point3="-159.904761904763,41.1437056708877" />
+                    Point1="-155.904761904762,37.1437056708878"
+                    Point2="-159.904761904762,37.1437056708878"
+                    Point3="-159.904761904762,41.1437056708878" />
                   <mssgle:LineSegment
-                    End="-159.904761904763,67.0714285714287" />
+                    End="-159.904761904762,67.0714285714287" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-91.4810723586313,42.1437056708877,23.0573828125,9.421875"
+              BoundingBox="-91.4810723586312,42.1437056708878,23.0573828125,9.421875"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

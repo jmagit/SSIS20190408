@@ -12,8 +12,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Carga actores"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{8B89A09F-AB1E-410A-B591-62C6DD5925DF}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{23F72A39-1E67-429D-B6CA-4926458AFCB6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -82,6 +82,18 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{8322158B-7DA1-4480-B34F-5AA5065BDD24}"
+      DTS:ObjectName="Fichero"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">D:\Trabajo\Cursos\SSIS\SSIS20190408\destino\actores.csv</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
